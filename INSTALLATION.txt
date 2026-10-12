@@ -1,0 +1,22 @@
+RFL F1 League auf dem Handy installieren
+
+WICHTIG
+Die App-Dateien muessen zuerst auf einer Website mit HTTPS liegen. Eine HTML-Datei aus Downloads kann nicht direkt als installierbare Handy-App hinzugefuegt werden.
+
+VEROEFFENTLICHEN
+1. Entpacke RFL-Mobile-PWA.zip.
+2. Lade den gesamten Inhalt des entpackten Ordners auf einen HTTPS-Webspace. index.html muss direkt im Web-Ordner liegen; manifest.webmanifest, service-worker.js und der Ordner icons muessen daneben liegen.
+3. Oeffne anschliessend die Website-Adresse auf dem Handy.
+
+IPHONE
+1. Oeffne die Website in Safari.
+2. Tippe auf Teilen.
+3. Waehle Zum Home-Bildschirm und bestaetige Hinzufuegen. Falls angeboten, aktiviere Als Web-App oeffnen.
+
+ANDROID
+1. Oeffne die Website in Chrome.
+2. Tippe auf das Menue mit den drei Punkten.
+3. Waehle App installieren oder Zum Startbildschirm hinzufuegen.
+
+HINWEISE
+Profilbild, Anzeigename und Darstellung werden auf jedem Geraet separat gespeichert und nicht zwischen PC und Handy synchronisiert. Bewerbungen werden weiterhin nur als Textdatei vorbereitet und nicht automatisch an einen Server gesendet. Windows-Funktionen wie Autostart und minimierter Start gibt es auf dem Handy nicht.

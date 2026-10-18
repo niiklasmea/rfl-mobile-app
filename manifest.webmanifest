@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "RFL F1 League",
-  "short_name": "RFL",
+  "name": "RFL-APP",
+  "short_name": "RFL-APP",
   "description": "Die RFL F1-Liga auf deinem Handy.",
   "lang": "de",
   "start_url": "./",

@@ -1,4 +1,4 @@
-RFL F1 League auf dem Handy installieren
+RFL-APP auf dem Handy installieren
 
 WICHTIG
 Die App-Dateien muessen zuerst auf einer Website mit HTTPS liegen. Eine HTML-Datei aus Downloads kann nicht direkt als installierbare Handy-App hinzugefuegt werden.

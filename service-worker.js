@@ -1,4 +1,4 @@
-const CACHE_NAME = "rfl-f1-league-v6";
+const CACHE_NAME = "rfl-f1-league-v7";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -8,7 +8,8 @@ const APP_FILES = [
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./icons/icon-512-maskable.png",
-  "./icons/apple-touch-icon.png"
+  "./icons/apple-touch-icon.png",
+  "./assets/rfl-logo.png"
 ];
 
 self.addEventListener("install", (event) => {

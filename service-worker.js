@@ -1,4 +1,4 @@
-const CACHE_NAME = "rfl-f1-league-v15";
+const CACHE_NAME = "rfl-f1-league-v16";
 const APP_FILES = [
   "./",
   "./index.html",

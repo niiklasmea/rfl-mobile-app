@@ -25,7 +25,16 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Build and publish Windows setup
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Build Windows setup
         run: pnpm run build:win
+      - name: Publish Windows release
+        uses: softprops/action-gh-release@v3
+        with:
+          name: RFL-APP ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          files: |
+            dist/RFL-APP-Setup-*.exe
+            dist/*.blockmap
+            dist/latest.yml
+          fail_on_unmatched_files: true
+          make_latest: true

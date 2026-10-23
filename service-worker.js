@@ -1,9 +1,11 @@
-const CACHE_NAME = "rfl-f1-league-v16";
+const CACHE_NAME = "rfl-f1-league-v17";
 const APP_FILES = [
   "./",
   "./index.html",
   "./backend-config.js",
   "./friends.js",
+  "./profile-crop.js",
+  "./profile-crop.css",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",

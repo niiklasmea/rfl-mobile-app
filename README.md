@@ -4,7 +4,7 @@ Die RFL-APP ist für Windows-PCs als eigenes Windows-Programm und für Smartphon
 
 ## Installieren
 
-- **Windows-PC:** [Windows-Installer herunterladen](https://github.com/niiklasmea/rfl-mobile-app/releases/latest/download/RFL-APP-Setup-1.3.5.exe), anschließend die heruntergeladene `.exe` öffnen und den Installationsordner auswählen.
+- **Windows-PC:** [Windows-Installer herunterladen](https://github.com/niiklasmea/rfl-mobile-app/releases/latest/download/RFL-APP-Setup-1.3.6.exe), anschließend die heruntergeladene `.exe` öffnen und den Installationsordner auswählen.
 - **Android:** [RFL-APP öffnen](https://niiklasmea.github.io/rfl-mobile-app/) und im Chrome-Menü **App installieren** oder **Zum Startbildschirm hinzufügen** auswählen.
 - **iPhone:** [RFL-APP öffnen](https://niiklasmea.github.io/rfl-mobile-app/) in Safari, **Teilen** und **Zum Home-Bildschirm** wählen.
 

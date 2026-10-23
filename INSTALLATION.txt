@@ -1,8 +1,8 @@
 RFL-APP auf PC und Handy installieren
 
 Windows-PC
-1. Lade den Windows-Installer herunter: https://github.com/niiklasmea/rfl-mobile-app/releases/latest/download/RFL-APP-Setup-1.3.5.exe
-2. Öffne die heruntergeladene Datei „RFL-APP-Setup-1.3.5.exe“.
+1. Lade den Windows-Installer herunter: https://github.com/niiklasmea/rfl-mobile-app/releases/latest/download/RFL-APP-Setup-1.3.6.exe
+2. Öffne die heruntergeladene Datei „RFL-APP-Setup-1.3.6.exe“.
 3. Wähle im Installationsfenster den Zielordner und schließe die Installation ab.
 
 Android

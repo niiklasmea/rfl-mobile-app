@@ -1,27 +1,23 @@
 RFL-APP auf PC und Handy installieren
 
-Die RFL-APP ist eine installierbare Web-App (PWA). Sie wird über eine sichere HTTPS-Adresse geöffnet:
-https://niiklasmea.github.io/rfl-mobile-app/
-
-PC (Windows, Chrome oder Edge)
-1. Öffne die App-Adresse im Browser.
-2. Klicke auf das Installationssymbol am rechten Ende der Adressleiste. Falls es nicht angezeigt wird, öffne das Browsermenü und wähle „RFL-APP installieren“.
-3. Bestätige die Installation. Die App erscheint anschließend im Startmenü und kann wie ein eigenes Fenster geöffnet werden.
+Windows-PC
+1. Lade den Windows-Installer herunter: https://github.com/niiklasmea/rfl-mobile-app/releases/latest/download/RFL-APP-Setup-1.3.4.exe
+2. Öffne die heruntergeladene Datei „RFL-APP-Setup-1.3.4.exe“.
+3. Wähle im Installationsfenster den Zielordner und schließe die Installation ab.
 
 Android
-1. Öffne die App-Adresse in Chrome.
+1. Öffne https://niiklasmea.github.io/rfl-mobile-app/ in Chrome.
 2. Tippe auf das Menü mit den drei Punkten.
-3. Wähle „App installieren“ oder „Zum Startbildschirm hinzufügen“ und bestätige.
+3. Wähle „App installieren“ oder „Zum Startbildschirm hinzufügen“.
 
 iPhone
-1. Öffne die App-Adresse in Safari.
+1. Öffne https://niiklasmea.github.io/rfl-mobile-app/ in Safari.
 2. Tippe auf „Teilen“.
 3. Wähle „Zum Home-Bildschirm“ und tippe auf „Hinzufügen“.
 
 Veröffentlichung
-GitHub Actions veröffentlicht die App automatisch bei Änderungen auf dem main-Branch. GitHub Pages muss in den Repository-Einstellungen die Quelle „GitHub Actions“ verwenden.
+Änderungen auf dem main-Branch aktualisieren die Handy-Web-App über GitHub Pages. Ein Tag im Format v* baut den Windows-Installer und veröffentlicht ihn als GitHub Release.
 
 Hinweise
-- Profilbild, Anzeigename und Darstellung werden auf jedem Gerät separat gespeichert und nicht zwischen PC und Handy synchronisiert.
-- Bewerbungen werden als Textdatei vorbereitet und nicht automatisch an einen Server gesendet.
-- Autostart und minimierter Start sind PC-Funktionen und stehen auf dem Handy nicht zur Verfügung.
+- Profilbild, Anzeigename und Darstellung werden auf jedem Gerät separat gespeichert.
+- Autostart und minimierter Start sind PC-Funktionen.

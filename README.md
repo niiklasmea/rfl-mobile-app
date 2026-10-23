@@ -1,13 +1,17 @@
 # RFL-APP
 
-Die RFL-APP ist eine installierbare Web-App (PWA) für Computer und Smartphones.
-
-**App öffnen:** https://niiklasmea.github.io/rfl-mobile-app/
+Die RFL-APP ist für Windows-PCs als eigenes Windows-Programm und für Smartphones als installierbare Web-App verfügbar.
 
 ## Installieren
 
-- **Windows-PC:** App-Adresse in Chrome oder Edge öffnen und rechts in der Adressleiste auf das Installationssymbol klicken. Alternativ im Browsermenü **RFL-APP installieren** auswählen.
-- **Android:** App-Adresse in Chrome öffnen, Menü **⋮** öffnen und **App installieren** oder **Zum Startbildschirm hinzufügen** auswählen.
-- **iPhone:** App-Adresse in Safari öffnen, auf **Teilen** tippen und **Zum Home-Bildschirm** auswählen.
+- **Windows-PC:** [Windows-Installer herunterladen](https://github.com/niiklasmea/rfl-mobile-app/releases/latest/download/RFL-APP-Setup-1.3.4.exe), anschließend die heruntergeladene `.exe` öffnen und den Installationsordner auswählen.
+- **Android:** [RFL-APP öffnen](https://niiklasmea.github.io/rfl-mobile-app/) und im Chrome-Menü **App installieren** oder **Zum Startbildschirm hinzufügen** auswählen.
+- **iPhone:** [RFL-APP öffnen](https://niiklasmea.github.io/rfl-mobile-app/) in Safari, **Teilen** und **Zum Home-Bildschirm** wählen.
 
-Die App wird über HTTPS mit GitHub Pages ausgeliefert. Der Workflow in `.github/workflows/deploy-pages.yml` veröffentlicht Änderungen auf `main` automatisch. In den Repository-Einstellungen muss GitHub Pages als Veröffentlichungsquelle **GitHub Actions** verwenden.
+Auf dem Handy werden Profilname und eigenes Profilbild pro Gerät gespeichert.
+
+## Entwicklung
+
+Die Website-Dateien liegen im Repository-Stamm. Die Windows-Version nutzt dieselben Dateien und wird aus einem Versions-Tag `v*` gebaut und als GitHub Release veröffentlicht.
+
+Lokaler Windows-Build: `pnpm install` und `pnpm run build:win`.

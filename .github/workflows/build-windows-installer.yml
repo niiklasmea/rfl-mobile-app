@@ -25,17 +25,7 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Build Windows setup
-        run: pnpm run build:win
-      - name: Publish GitHub release
-        shell: pwsh
+      - name: Build and publish Windows setup
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          $tag = $env:GITHUB_REF_NAME
-          $assets = @(
-            (Get-Item "dist/RFL-APP-Setup-*.exe").FullName,
-            (Get-Item "dist/*.exe.blockmap").FullName,
-            (Get-Item "dist/latest.yml").FullName
-          )
-          gh release create $tag @assets --title "RFL-APP $tag" --notes "Windows-Installationsprogramm für RFL-APP."
+        run: pnpm run build:win

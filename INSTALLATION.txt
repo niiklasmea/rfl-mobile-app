@@ -1,22 +1,27 @@
-RFL-APP auf dem Handy installieren
+RFL-APP auf PC und Handy installieren
 
-WICHTIG
-Die App-Dateien muessen zuerst auf einer Website mit HTTPS liegen. Eine HTML-Datei aus Downloads kann nicht direkt als installierbare Handy-App hinzugefuegt werden.
+Die RFL-APP ist eine installierbare Web-App (PWA). Sie wird über eine sichere HTTPS-Adresse geöffnet:
+https://niiklasmea.github.io/rfl-mobile-app/
 
-VEROEFFENTLICHEN
-1. Entpacke RFL-Mobile-PWA.zip.
-2. Lade den gesamten Inhalt des entpackten Ordners auf einen HTTPS-Webspace. index.html muss direkt im Web-Ordner liegen; manifest.webmanifest, service-worker.js und der Ordner icons muessen daneben liegen.
-3. Oeffne anschliessend die Website-Adresse auf dem Handy.
+PC (Windows, Chrome oder Edge)
+1. Öffne die App-Adresse im Browser.
+2. Klicke auf das Installationssymbol am rechten Ende der Adressleiste. Falls es nicht angezeigt wird, öffne das Browsermenü und wähle „RFL-APP installieren“.
+3. Bestätige die Installation. Die App erscheint anschließend im Startmenü und kann wie ein eigenes Fenster geöffnet werden.
 
-IPHONE
-1. Oeffne die Website in Safari.
-2. Tippe auf Teilen.
-3. Waehle Zum Home-Bildschirm und bestaetige Hinzufuegen. Falls angeboten, aktiviere Als Web-App oeffnen.
+Android
+1. Öffne die App-Adresse in Chrome.
+2. Tippe auf das Menü mit den drei Punkten.
+3. Wähle „App installieren“ oder „Zum Startbildschirm hinzufügen“ und bestätige.
 
-ANDROID
-1. Oeffne die Website in Chrome.
-2. Tippe auf das Menue mit den drei Punkten.
-3. Waehle App installieren oder Zum Startbildschirm hinzufuegen.
+iPhone
+1. Öffne die App-Adresse in Safari.
+2. Tippe auf „Teilen“.
+3. Wähle „Zum Home-Bildschirm“ und tippe auf „Hinzufügen“.
 
-HINWEISE
-Profilbild, Anzeigename und Darstellung werden auf jedem Geraet separat gespeichert und nicht zwischen PC und Handy synchronisiert. Bewerbungen werden weiterhin nur als Textdatei vorbereitet und nicht automatisch an einen Server gesendet. Windows-Funktionen wie Autostart und minimierter Start gibt es auf dem Handy nicht.
+Veröffentlichung
+GitHub Actions veröffentlicht die App automatisch bei Änderungen auf dem main-Branch. GitHub Pages muss in den Repository-Einstellungen die Quelle „GitHub Actions“ verwenden.
+
+Hinweise
+- Profilbild, Anzeigename und Darstellung werden auf jedem Gerät separat gespeichert und nicht zwischen PC und Handy synchronisiert.
+- Bewerbungen werden als Textdatei vorbereitet und nicht automatisch an einen Server gesendet.
+- Autostart und minimierter Start sind PC-Funktionen und stehen auf dem Handy nicht zur Verfügung.

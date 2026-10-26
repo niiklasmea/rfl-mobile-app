@@ -53,7 +53,7 @@
 .app-news-item.unread { border-left: 3px solid var(--accent); }
 .app-news-item time { display: block; color: var(--muted); font-size: 9px; margin-bottom: 6px; }
 .app-news-item h4 { margin: 0; font-size: 13px; }
-.app-news-item p { color: var(--muted); font-size: 11px; line-height: 1.6; margin: 8px 0 12px; }
+.app-news-item p { color: var(--muted); font-size: 11px; line-height: 1.7; white-space: pre-line; margin: 8px 0 12px; }
 .app-news-item .btn { min-height: 36px; }
 .notifications-panel { width: min(100%, 590px); }
 

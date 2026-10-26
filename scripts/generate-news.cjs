@@ -4,7 +4,13 @@ const { execFileSync } = require("node:child_process");
 const root = path.resolve(__dirname, "..");
 const git = (...args) => execFileSync("git", args, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"], maxBuffer: 8 * 1024 * 1024 }).trim();
 const currentVersion = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8")).version;
-const rows = git("log", "-40", "--format=%H%x09%cI%x09%s").split("\n").filter(Boolean);
+// Older release notices were removed at the owner's request. New updates still appear automatically.
+const firstNewsCommit = "4e49c80e10691dacf3d9e7151c11ea724d039705";
+const rows = git("log", "-40", "--format=%H%x09%cI%x09%s", `${firstNewsCommit}^..HEAD`).split("\n").filter(Boolean);
+const release139 = {
+  de: "📱 iPhone: Menü unterhalb der Uhrzeit – Einstellungen, Glocke und Freunde bleiben erreichbar.\n🏎️ Start: Die F1-Animation wartet auf das sichtbare Windows-Fenster.\n👤 Benutzername: Klare Fehler bei belegten Namen und Bestätigung nach Änderungen.\n🔑 Konto-Hilfe: Passwort- und Benutzername-Hilfe, erneute Bestätigungs-E-Mail und klare Versandfehler.\n🔔 Glocke: App- und Kalenderneuigkeiten mit gespeichertem Gelesen-Status.\n⚡ Updates: Schutz vor alten zwischengespeicherten Dateien.",
+  en: "📱 iPhone: The menu sits below the status bar, keeping settings, the bell and friends accessible.\n🏎️ Startup: The F1 intro waits until the Windows app is visible.\n👤 Username: Clear errors for taken names and confirmation after changes.\n🔑 Account help: Password and username help, resend confirmation email and clear mail errors.\n🔔 Bell: App and calendar news with saved read status.\n⚡ Updates: Protection against outdated cached files."
+};
 const appFiles = /^(index\.html|friends\.js|app-updates\.js|startup\.js|ui-fixes\.css|profile-crop\.(js|css)|desktop\/|package\.json)/;
 const readAt = (sha, file) => {
   try { return git("show", `${sha}:${file}`); } catch { return ""; }
@@ -40,6 +46,7 @@ for (const row of rows) {
     title = { de: `RFL-APP ${currentVersion}`, en: `RFL-APP ${currentVersion}` };
     body = { de: subject.slice(0, 180), en: body.en };
   }
+  if (version === "1.3.9" && !calendarChanged) body = release139;
   items.push({ id, publishedAt, title, body, action });
   if (items.length === 6) break;
 }

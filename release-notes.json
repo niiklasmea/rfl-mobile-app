@@ -2,80 +2,15 @@
   "schemaVersion": 1,
   "items": [
     {
-      "id": "46b0a1d8801237b742f9a9a43bab529f68e83f0a",
-      "publishedAt": "2026-10-23T23:22:32+02:00",
+      "id": "4e49c80e10691dacf3d9e7151c11ea724d039705",
+      "publishedAt": "2026-10-26T23:20:36+01:00",
       "title": {
         "de": "RFL-APP 1.3.9",
         "en": "RFL-APP 1.3.9"
       },
       "body": {
-        "de": "Add movable circular profile image crop",
-        "en": "The app has been improved. Reopen it to use the latest version."
-      },
-      "action": "home"
-    },
-    {
-      "id": "afd4b5faea546ed7bde2c8d5b9784ccd3c6f4046",
-      "publishedAt": "2026-10-23T23:13:38+02:00",
-      "title": {
-        "de": "RFL-APP 1.3.7",
-        "en": "RFL-APP 1.3.7"
-      },
-      "body": {
-        "de": "Die App wurde verbessert. Öffne sie neu, um die aktuelle Version zu verwenden.",
-        "en": "The app has been improved. Reopen it to use the latest version."
-      },
-      "action": "home"
-    },
-    {
-      "id": "42f9030aad151d87cabbeb11c98e3381d3696c3d",
-      "publishedAt": "2026-10-23T23:08:07+02:00",
-      "title": {
-        "de": "RFL-APP 1.3.6",
-        "en": "RFL-APP 1.3.6"
-      },
-      "body": {
-        "de": "Die App wurde verbessert. Öffne sie neu, um die aktuelle Version zu verwenden.",
-        "en": "The app has been improved. Reopen it to use the latest version."
-      },
-      "action": "home"
-    },
-    {
-      "id": "b4120c7d739f4bc1b601e1bbcdcd2c3f14c8e4c2",
-      "publishedAt": "2026-10-23T23:03:44+02:00",
-      "title": {
-        "de": "RFL-APP 1.3.5",
-        "en": "RFL-APP 1.3.5"
-      },
-      "body": {
-        "de": "Die App wurde verbessert. Öffne sie neu, um die aktuelle Version zu verwenden.",
-        "en": "The app has been improved. Reopen it to use the latest version."
-      },
-      "action": "home"
-    },
-    {
-      "id": "a52cfe6df02f9467621cdc42a4fab921247f9776",
-      "publishedAt": "2026-10-23T22:54:10+02:00",
-      "title": {
-        "de": "RFL-APP 1.3.4",
-        "en": "RFL-APP 1.3.4"
-      },
-      "body": {
-        "de": "Die Windows-App wurde verbessert. Ein bereitstehendes Update lässt sich beim Neustart installieren.",
-        "en": "The Windows app has been improved. Restart to install an available update."
-      },
-      "action": "home"
-    },
-    {
-      "id": "8b73685e29c15c7a7458a112325c0d2520e3e0ea",
-      "publishedAt": "2026-10-23T22:37:57+02:00",
-      "title": {
-        "de": "RFL-APP aktualisiert",
-        "en": "RFL-APP updated"
-      },
-      "body": {
-        "de": "Die App wurde verbessert. Öffne sie neu, um die aktuelle Version zu verwenden.",
-        "en": "The app has been improved. Reopen it to use the latest version."
+        "de": "📱 iPhone: Menü unterhalb der Uhrzeit – Einstellungen, Glocke und Freunde bleiben erreichbar.\n🏎️ Start: Die F1-Animation wartet auf das sichtbare Windows-Fenster.\n👤 Benutzername: Klare Fehler bei belegten Namen und Bestätigung nach Änderungen.\n🔑 Konto-Hilfe: Passwort- und Benutzername-Hilfe, erneute Bestätigungs-E-Mail und klare Versandfehler.\n🔔 Glocke: App- und Kalenderneuigkeiten mit gespeichertem Gelesen-Status.\n⚡ Updates: Schutz vor alten zwischengespeicherten Dateien.",
+        "en": "📱 iPhone: The menu sits below the status bar, keeping settings, the bell and friends accessible.\n🏎️ Startup: The F1 intro waits until the Windows app is visible.\n👤 Username: Clear errors for taken names and confirmation after changes.\n🔑 Account help: Password and username help, resend confirmation email and clear mail errors.\n🔔 Bell: App and calendar news with saved read status.\n⚡ Updates: Protection against outdated cached files."
       },
       "action": "home"
     }

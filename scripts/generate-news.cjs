@@ -8,8 +8,8 @@ const currentVersion = JSON.parse(fs.readFileSync(path.join(root, "package.json"
 const firstNewsCommit = "4e49c80e10691dacf3d9e7151c11ea724d039705";
 const rows = git("log", "-40", "--format=%H%x09%cI%x09%s", `${firstNewsCommit}^..HEAD`).split("\n").filter(Boolean);
 const release139 = {
-  de: "📱 iPhone: Menü unterhalb der Uhrzeit – Einstellungen, Glocke und Freunde bleiben erreichbar.\n🏎️ Start: Die F1-Animation wartet auf das sichtbare Windows-Fenster.\n👤 Benutzername: Klare Fehler bei belegten Namen und Bestätigung nach Änderungen.\n🔑 Konto-Hilfe: Passwort- und Benutzername-Hilfe, erneute Bestätigungs-E-Mail und klare Versandfehler.\n🔔 Glocke: App- und Kalenderneuigkeiten mit gespeichertem Gelesen-Status.\n⚡ Updates: Schutz vor alten zwischengespeicherten Dateien.",
-  en: "📱 iPhone: The menu sits below the status bar, keeping settings, the bell and friends accessible.\n🏎️ Startup: The F1 intro waits until the Windows app is visible.\n👤 Username: Clear errors for taken names and confirmation after changes.\n🔑 Account help: Password and username help, resend confirmation email and clear mail errors.\n🔔 Bell: App and calendar news with saved read status.\n⚡ Updates: Protection against outdated cached files."
+  de: "📱 iPhone-Menü besser erreichbar\n🏎️ Startanimation verbessert\n👤 Klarere Konto- und Benutzernamen-Hilfe\n🔔 Neuigkeiten direkt in der Glocke",
+  en: "📱 Easier access to the iPhone menu\n🏎️ Improved startup animation\n👤 Clearer account and username help\n🔔 App news directly in the bell"
 };
 const appFiles = /^(index\.html|friends\.js|app-updates\.js|startup\.js|ui-fixes\.css|profile-crop\.(js|css)|desktop\/|package\.json)/;
 const readAt = (sha, file) => {

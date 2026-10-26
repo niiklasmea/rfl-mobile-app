@@ -26,4 +26,3 @@ The username-availability RPC is defined in `backend/username-availability.sql`.
 Run `node --test tests/*.test.cjs` for startup and news regression checks. Account UI scenarios should be exercised against an isolated mock backend, without changing real users' passwords or sending test emails to users.
 
 Password recovery still requires working SMTP credentials in Supabase. A successful UI request must never be treated as proof that a message reached the recipient's inbox.
-

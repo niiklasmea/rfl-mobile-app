@@ -36,7 +36,7 @@ for (const row of rows) {
   } else if (files.some(file => file.startsWith("desktop/"))) {
     body = { de: "Die Windows-App wurde verbessert. Ein bereitstehendes Update lässt sich beim Neustart installieren.", en: "The Windows app has been improved. Restart to install an available update." };
   }
-  if (id === rows[0].split("\t")[0]) {
+  if (items.length === 0) {
     title = { de: `RFL-APP ${currentVersion}`, en: `RFL-APP ${currentVersion}` };
     body = { de: subject.slice(0, 180), en: body.en };
   }

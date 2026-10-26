@@ -23,6 +23,16 @@ jobs:
     steps:
       - name: Get the source files
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Generate app news from published changes
+        run: node scripts/generate-news.cjs
+      - name: Check startup and app news behavior
+        run: node --test tests/*.test.cjs
       - name: Set up GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload the app

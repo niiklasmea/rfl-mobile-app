@@ -96,7 +96,18 @@ function createWindow(startMinimized = false) {
     } else {
       mainWindow.show();
     }
+    notifyAppVisible();
   });
+
+  // The renderer must start its intro after the window is visible, including a minimized launch.
+  const notifyAppVisible = () => {
+    if (mainWindow && !mainWindow.isDestroyed() && mainWindow.isVisible() && !mainWindow.isMinimized()) {
+      mainWindow.webContents.send("app:visible");
+    }
+  };
+  mainWindow.on("restore", notifyAppVisible);
+  mainWindow.on("focus", notifyAppVisible);
+  mainWindow.webContents.on("did-finish-load", notifyAppVisible);
 
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
     if (/^https?:\/\//i.test(url)) {
@@ -122,6 +133,11 @@ function createWindow(startMinimized = false) {
 }
 
 // Autostart: Status abfragen und ein-/ausschalten
+ipcMain.handle("window:is-visible", (event) => {
+  return Boolean(mainWindow && !mainWindow.isDestroyed()
+    && event.sender === mainWindow.webContents && mainWindow.isVisible() && !mainWindow.isMinimized());
+});
+
 ipcMain.handle("autostart:get", () => {
   return app.getLoginItemSettings({ path: process.execPath, args: [] }).openAtLogin;
 });

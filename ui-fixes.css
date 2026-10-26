@@ -1,0 +1,73 @@
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+
+[hidden] { display: none !important; }
+
+.bar {
+  height: auto;
+  min-height: calc(72px + var(--safe-top));
+  padding-top: var(--safe-top);
+  padding-right: max(clamp(18px, 5vw, 64px), var(--safe-right));
+  padding-left: max(clamp(18px, 5vw, 64px), var(--safe-left));
+}
+
+.settings-overlay, .friends-overlay, .profile-crop-overlay, .trailer-overlay {
+  padding-top: max(16px, calc(var(--safe-top) + 12px));
+  padding-right: max(16px, calc(var(--safe-right) + 12px));
+  padding-bottom: max(16px, calc(var(--safe-bottom) + 12px));
+  padding-left: max(16px, calc(var(--safe-left) + 12px));
+}
+
+.settings-panel, .friends-panel, .profile-crop-panel {
+  max-height: calc(100svh - var(--safe-top) - var(--safe-bottom) - 32px);
+  max-height: calc(100dvh - var(--safe-top) - var(--safe-bottom) - 32px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.intro-skip {
+  right: max(18px, calc(var(--safe-right) + 12px));
+  bottom: max(18px, calc(var(--safe-bottom) + 12px));
+}
+
+.intro-progress { background: var(--accent); }
+.app-intro.pending { display: grid; opacity: 1; }
+.app-intro.pending > * { visibility: hidden; animation: none; }
+.app-intro.pending > .intro-logo { visibility: visible; opacity: 1; clip-path: none; }
+.app-intro.reduced-motion .intro-car { display: none; }
+.app-intro.reduced-motion .intro-logo { opacity: 1; clip-path: none; }
+
+.friends-link:disabled { opacity: .55; cursor: wait; }
+.username-message { margin: 9px 0 0; min-height: 1.4em; }
+.account-help { margin: 12px 0; padding: 12px; border: 1px solid var(--line); border-radius: 8px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.account-help[hidden] { display: none; }
+.news-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 20px 0 10px; }
+.news-heading h3 { margin: 0; font-size: 13px; }
+.news-list { display: grid; gap: 10px; }
+.app-news-item { padding: 14px; border: 1px solid var(--line); border-radius: 9px; background: #ffffff04; }
+.app-news-item.unread { border-left: 3px solid var(--accent); }
+.app-news-item time { display: block; color: var(--muted); font-size: 9px; margin-bottom: 6px; }
+.app-news-item h4 { margin: 0; font-size: 13px; }
+.app-news-item p { color: var(--muted); font-size: 11px; line-height: 1.6; margin: 8px 0 12px; }
+.app-news-item .btn { min-height: 36px; }
+.notifications-panel { width: min(100%, 590px); }
+
+@media (max-width: 620px) {
+  .bar {
+    min-height: calc(64px + var(--safe-top));
+    padding-top: calc(9px + var(--safe-top));
+    padding-right: max(16px, calc(var(--safe-right) + 8px));
+    padding-bottom: 9px;
+    padding-left: max(16px, calc(var(--safe-left) + 8px));
+  }
+  .wrap, .hero-copy { max-width: calc(100% - 32px - var(--safe-left) - var(--safe-right)); }
+  .settings-button, .notifications-button, .friends-button { min-width: 44px; min-height: 44px; }
+  .settings-input, .field input, .field select, .field textarea { font-size: 16px; }
+  .friends-panel, .settings-panel { padding: 18px; }
+  .foot { padding-bottom: calc(20px + var(--safe-bottom)); }
+}

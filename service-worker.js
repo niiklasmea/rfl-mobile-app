@@ -1,9 +1,14 @@
-const CACHE_NAME = "rfl-f1-league-v17";
+const CACHE_NAME = "rfl-f1-league-v18";
 const APP_FILES = [
   "./",
   "./index.html",
   "./backend-config.js",
   "./friends.js",
+  "./startup.js",
+  "./ui-fixes.css",
+  "./release-notes.js",
+  "./release-notes.json",
+  "./app-updates.js",
   "./profile-crop.js",
   "./profile-crop.css",
   "./manifest.webmanifest",
@@ -37,6 +42,22 @@ self.addEventListener("fetch", (event) => {
   const request = event.request;
   const url = new URL(request.url);
   if (request.method !== "GET" || url.origin !== self.location.origin) return;
+
+  if (url.pathname.endsWith("/release-notes.json")) {
+    event.respondWith((async () => {
+      try {
+        const response = await fetch(request);
+        if (response.ok) {
+          const cache = await caches.open(CACHE_NAME);
+          await cache.put(request, response.clone());
+        }
+        return response;
+      } catch {
+        return (await caches.match(request)) || new Response('{"schemaVersion":1,"items":[]}', { headers: { "Content-Type": "application/json" } });
+      }
+    })());
+    return;
+  }
 
   if (request.mode === "navigate") {
     event.respondWith((async () => {

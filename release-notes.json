@@ -2,6 +2,19 @@
   "schemaVersion": 1,
   "items": [
     {
+      "id": "4b5124208d1f37120280f02bb6cd2d258e552121",
+      "publishedAt": "2026-10-28T00:01:47+01:00",
+      "title": {
+        "de": "RFL-APP 1.3.12",
+        "en": "RFL-APP 1.3.12"
+      },
+      "body": {
+        "de": "🎬 Neuer Saison-Trailer zum Rennkalender\n🏁 Auf der Startseite und im Rennkalender ansehen",
+        "en": "🎬 New race calendar season trailer\n🏁 Watch it on Home and in the race calendar"
+      },
+      "action": "home"
+    },
+    {
       "id": "45fcf0610bc91da5a51580a213cf0b9f93a56682",
       "publishedAt": "2026-10-27T23:53:20+01:00",
       "title": {

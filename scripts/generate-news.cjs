@@ -46,6 +46,7 @@ for (const row of rows) {
     title = { de: `RFL-APP ${currentVersion}`, en: `RFL-APP ${currentVersion}` };
     body = { de: subject.slice(0, 180), en: body.en };
   }
+  if (calendarChanged) body = { de: "🏁 Saisonstart: 2. Januar · danach wöchentlich\n🇳🇱 Neu dabei: Niederlande · Miami jetzt Rennen 4", en: "🏁 Season starts January 2 · weekly races\n🇳🇱 Netherlands added · Miami is now round 4" };
   if (version === "1.3.9" && !calendarChanged) body = release139;
   items.push({ id, publishedAt, title, body, action });
   if (items.length === 6) break;

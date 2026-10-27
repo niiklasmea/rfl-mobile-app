@@ -19,6 +19,8 @@
       })
     : null;
 
+  window.RflPush?.init(client);
+
   const dialog = document.getElementById("friendsDialog");
   const notificationsDialog = document.getElementById("notificationsDialog");
   const openButton = document.getElementById("openFriends");
@@ -107,6 +109,7 @@
   }
 
   function setSessionView(user) {
+    window.RflPush?.setAccount(user);
     window.RflUpdates?.setAccount(user?.id || null);
     if (recoveryMode && user) {
       showRecovery();
@@ -698,6 +701,7 @@
 
   document.getElementById("friendsSignOut").addEventListener("click", async () => {
     if (!client) return;
+    await window.RflPush?.beforeSignOut().catch(()=>{});
     const { error } = await client.auth.signOut();
     if (error) showMessage(statusMessage, showError(error), true);
     else {

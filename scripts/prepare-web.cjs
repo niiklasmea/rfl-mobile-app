@@ -14,8 +14,9 @@ function prepareHtml(html, buildId) {
 
 function prepareWorker(worker, assets, buildId) {
   const existing = JSON.parse(worker.match(/const APP_FILES = (\[[\s\S]*?\]);/)[1]);
-  const files = [...new Set([...existing.filter(file => !/\.(?:js|css)(?:\?|$)/.test(file)), ...assets])];
+  const files = [...new Set([...existing.filter(file => !/\.(?:js|css)(?:\?|$)/.test(file)), ...assets, `./push-worker.js?build=${buildId}`])];
   return worker.replace(/const CACHE_NAME = "[^"]+";/, `const CACHE_NAME = "rfl-f1-league-${buildId}";`)
+    .replace(/importScripts\('\.\/push-worker\.js(?:\?[^']*)?'\);/, `importScripts('./push-worker.js?build=${buildId}');`)
     .replace(/const APP_FILES = \[[\s\S]*?\];/, `const APP_FILES = ${JSON.stringify(files, null, 2)};`);
 }
 

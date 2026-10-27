@@ -71,3 +71,5 @@
   .friends-panel, .settings-panel { padding: 18px; }
   .foot { padding-bottom: calc(20px + var(--safe-bottom)); }
 }
+
+.push-settings{padding:18px 0;border-top:1px solid var(--line);margin-top:16px}.push-settings-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.push-settings-heading strong{font-size:13px}.push-settings p{font-size:12px;line-height:1.6;color:var(--muted);margin:10px 0}.push-settings .minimize-option{margin:8px 0}.push-settings #pushTest{margin-top:10px}

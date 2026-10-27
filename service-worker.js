@@ -1,9 +1,12 @@
+importScripts('./push-worker.js');
 const CACHE_NAME = "rfl-f1-league-v18";
 const APP_FILES = [
   "./",
   "./index.html",
   "./backend-config.js",
   "./friends.js",
+  "./push.js",
+  "./push-worker.js",
   "./startup.js",
   "./ui-fixes.css",
   "./release-notes.js",

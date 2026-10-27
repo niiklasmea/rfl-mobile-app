@@ -47,6 +47,7 @@ for (const row of rows) {
     body = { de: subject.slice(0, 180), en: body.en };
   }
   if (calendarChanged) body = { de: "🏁 Saisonstart: 2. Januar · danach wöchentlich\n🇳🇱 Neu dabei: Niederlande · Miami jetzt Rennen 4", en: "🏁 Season starts January 2 · weekly races\n🇳🇱 Netherlands added · Miami is now round 4" };
+  if (version === "1.3.12" && !calendarChanged) body = { de: "🎬 Neuer Saison-Trailer zum Rennkalender\n🏁 Auf der Startseite und im Rennkalender ansehen", en: "🎬 New race calendar season trailer\n🏁 Watch it on Home and in the race calendar" };
   if (version === "1.3.11" && !calendarChanged) body = { de: "🔔 Handy-Benachrichtigungen für Anfragen und Neuigkeiten\n⚙️ In den Einstellungen aktivieren und testen", en: "🔔 Phone notifications for requests and app news\n⚙️ Enable and test them in Settings" };
   if (version === "1.3.9" && !calendarChanged) body = release139;
   items.push({ id, publishedAt, title, body, action });

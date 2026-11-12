@@ -11,7 +11,7 @@
   let desktopVisible = false;
   const hasDesktopBridge = Boolean(window.appSettings?.onAppVisible && window.appSettings?.isWindowVisible);
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const duration = reducedMotion ? 1800 : 3600;
+  const duration = reducedMotion ? 1200 : 2600;
   intro.classList.add("pending");
 
   function finish() {
@@ -22,11 +22,12 @@
     intro.setAttribute("aria-hidden", "true");
     document.removeEventListener("visibilitychange", visibilityChanged);
     unsubscribe?.();
-    setTimeout(() => intro.remove(), reducedMotion ? 80 : 760);
+    setTimeout(() => intro.remove(), reducedMotion ? 120 : 400);
   }
 
   function visibilityChanged() {
     if (finishing) return;
+    intro.classList.toggle("intro-paused", document.hidden);
     if (!started) {
       if (!document.hidden && (!hasDesktopBridge || desktopVisible)) start();
       return;

@@ -33,7 +33,7 @@ test("Windows intro waits for the visible window even after a slow load", async 
   assert.equal(app.timers.size, 0);
   app.show();
   assert.equal(app.classes.has("show"), true);
-  assert.equal([...app.timers.values()][0].delay, 3600);
+  assert.equal([...app.timers.values()][0].delay, 2600);
   app.show();
   assert.equal(app.timers.size, 1, "later focus events must not restart the intro");
 });
@@ -46,9 +46,11 @@ test("hidden browser startup and time in a background tab do not consume the int
   app.setTime(1000);
   app.changeVisibility(true);
   assert.equal(app.timers.size, 0);
+  assert.equal(app.classes.has("intro-paused"), true);
   app.setTime(90000);
   app.changeVisibility(false);
-  assert.equal([...app.timers.values()][0].delay, 2600);
+  assert.equal(app.classes.has("intro-paused"), false);
+  assert.equal([...app.timers.values()][0].delay, 1600);
 });
 
 test("a restore event arriving before Chromium visibility updates still starts the desktop intro", async () => {
@@ -57,13 +59,13 @@ test("a restore event arriving before Chromium visibility updates still starts t
   assert.equal(app.timers.size, 0);
   app.changeVisibility(false);
   assert.equal(app.classes.has("show"), true);
-  assert.equal([...app.timers.values()][0].delay, 3600);
+  assert.equal([...app.timers.values()][0].delay, 2600);
 });
 
 test("reduced-motion users still get an intentional visible logo introduction", async () => {
   const app = await boot({ reduced: true });
   assert.equal(app.classes.has("reduced-motion"), true);
-  assert.equal([...app.timers.values()][0].delay, 1800);
+  assert.equal([...app.timers.values()][0].delay, 1200);
   [...app.timers.values()][0].fn();
   assert.equal(app.classes.has("exit"), true);
 });

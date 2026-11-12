@@ -74,4 +74,32 @@
 
 .push-settings{padding:18px 0;border-top:1px solid var(--line);margin-top:16px}.push-settings-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.push-settings-heading strong{font-size:13px}.push-settings p{font-size:12px;line-height:1.6;color:var(--muted);margin:10px 0}.push-settings .minimize-option{margin:8px 0}.push-settings #pushTest{margin-top:10px}
 
-@media(max-width:620px){.calendar-trailer-player{aspect-ratio:4/3;min-height:360px}}
+/* Keep the supplied widescreen film intact on both phone and desktop. */
+.calendar-trailer-player { aspect-ratio: 16/9; min-height: 0; background: #050607; }
+.calendar-trailer-player video { display: block; width: 100%; height: 100%; object-fit: contain; background: #050607; }
+.calendar-trailer-start { background: #05060766; backdrop-filter: blur(2px); text-shadow: 0 2px 12px #000; }
+.calendar-trailer-start::before { color: #fff; background: #d44201e8; border-color: #ff8b5590; }
+.trailer-window { height: auto; max-height: calc(100dvh - var(--safe-top) - var(--safe-bottom) - 32px); }
+.trailer-window video { display: block; width: 100%; min-height: 0; max-height: calc(100dvh - var(--safe-top) - var(--safe-bottom) - 130px); aspect-ratio: 16/9; object-fit: contain; background: #050607; }
+.trailer-status { margin: 0; padding: 10px 14px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.trailer-status:empty { display: none; }
+.calendar-trailer-player .trailer-status { position: absolute; z-index: 2; inset: auto 0 0; background: #050607e8; pointer-events: none; }
+
+/* A three-second reveal: one quick F1 pass, a clear logo, then a soft fade. */
+.app-intro { background: radial-gradient(ellipse at 50% 49%,#321509 0%,#14100e 36%,#090b0c 74%); }
+.app-intro.show { animation: none; opacity: 1; }
+.app-intro.exit { animation: intro-finish .38s ease-in-out both; }
+.app-intro .intro-car { animation: intro-drive 1.25s .12s cubic-bezier(.35,.05,.65,1) both; will-change: transform,opacity; }
+.app-intro .intro-logo { animation: intro-logo-reveal 1s .3s cubic-bezier(.16,1,.3,1) both; filter: drop-shadow(0 0 22px #d4420145); }
+.app-intro .intro-caption { animation: intro-caption .5s .9s ease-out both; }
+.app-intro .intro-subline { animation: intro-caption .5s 1.08s ease-out both; }
+.app-intro .intro-track span { animation: intro-glow 1.15s .2s ease-out both; }
+.app-intro .intro-car::before { content: ""; position: absolute; z-index: -1; right: 65%; top: 64%; width: 85%; height: 2px; background: linear-gradient(90deg,transparent,#d44201b0); filter: blur(1px); }
+.app-intro.intro-paused, .app-intro.intro-paused * { animation-play-state: paused !important; }
+.app-intro.pending .intro-logo { animation: none; opacity: .15; }
+@keyframes intro-finish { to { opacity: 0; transform: scale(1.015); visibility: hidden; } }
+@media(prefers-reduced-motion:reduce) {
+  .app-intro.show, .app-intro.exit { animation-duration: .12s; }
+  .app-intro .intro-car, .app-intro .intro-track { display: none; }
+  .app-intro .intro-logo, .app-intro .intro-caption, .app-intro .intro-subline { animation: none; opacity: 1; clip-path: none; }
+}

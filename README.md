@@ -37,3 +37,10 @@ Server setup is deployed in project wecrosfultwswyswwkwt: apply backend/push.sql
 Friend inserts enqueue recipient-only jobs. The fixed published release feed produces deduplicated news jobs only for devices subscribed before publication. The worker checks current preferences and pending-request ownership before delivery, retries transient failures, and removes expired push subscriptions (404/410). Historical notes are not replayed to new subscriptions. Delivered/failed jobs expire after seven days. The service worker opens only the app's own allowlisted screens.
 
 Verification: automated permission/denial/account-switch/error/click tests, anonymous-access rejection, live RPC save/test/remove in a rolled-back transaction, and successful cron/worker HTTP 200. Actual OS delivery must additionally be checked using Settings > Test notification on a physical opted-in phone.
+
+
+## Trailer and intro (1.3.13)
+
+The supplied RFL_S4_2027_Kalender.mp4 is packaged in assets as a content-addressed MP4 (H.264, 1920x1080 at 50 fps; original AAC audio copied). Native controls support inline phone playback and fullscreen. The player starts only on a tap, pauses other players and stops audio when closed, backgrounded, or leaving the calendar. On the PWA the film needs a connection and uses normal browser byte-range requests; it is deliberately excluded from the service-worker cache and install precache. Windows bundles the film for offline playback. The poster is included in the app cache. New video/poster contents need new filenames so existing mobile browser caches cannot show an old trailer.
+
+The F1 startup now displays for 2.6 seconds plus a 0.38 second exit (1.2 seconds in reduced-motion mode). Animation timelines pause with the visible-time timer while the document is hidden. Minimized desktop launches still wait until restoration.

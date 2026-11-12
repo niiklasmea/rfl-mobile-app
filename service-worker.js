@@ -8,6 +8,8 @@ const APP_FILES = [
   "./push.js",
   "./push-worker.js",
   "./startup.js",
+  "./trailer-player.js",
+  "./assets/rfl-s4-2027-poster-05b8286fed.jpg",
   "./ui-fixes.css",
   "./release-notes.js",
   "./release-notes.json",
@@ -45,6 +47,9 @@ self.addEventListener("fetch", (event) => {
   const request = event.request;
   const url = new URL(request.url);
   if (request.method !== "GET" || url.origin !== self.location.origin) return;
+  // Let the browser handle video byte ranges; do not put a 206 response in CacheStorage.
+  // Films load only when Play is pressed, keeping startup light on mobile data.
+  if (url.pathname.endsWith(".mp4")) return;
 
   if (url.pathname.endsWith("/release-notes.json")) {
     event.respondWith((async () => {

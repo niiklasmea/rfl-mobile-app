@@ -85,21 +85,3 @@
 .trailer-status:empty { display: none; }
 .calendar-trailer-player .trailer-status { position: absolute; z-index: 2; inset: auto 0 0; background: #050607e8; pointer-events: none; }
 
-/* A three-second reveal: one quick F1 pass, a clear logo, then a soft fade. */
-.app-intro { background: radial-gradient(ellipse at 50% 49%,#321509 0%,#14100e 36%,#090b0c 74%); }
-.app-intro.show { animation: none; opacity: 1; }
-.app-intro.exit { animation: intro-finish .38s ease-in-out both; }
-.app-intro .intro-car { animation: intro-drive 1.25s .12s cubic-bezier(.35,.05,.65,1) both; will-change: transform,opacity; }
-.app-intro .intro-logo { animation: intro-logo-reveal 1s .3s cubic-bezier(.16,1,.3,1) both; filter: drop-shadow(0 0 22px #d4420145); }
-.app-intro .intro-caption { animation: intro-caption .5s .9s ease-out both; }
-.app-intro .intro-subline { animation: intro-caption .5s 1.08s ease-out both; }
-.app-intro .intro-track span { animation: intro-glow 1.15s .2s ease-out both; }
-.app-intro .intro-car::before { content: ""; position: absolute; z-index: -1; right: 65%; top: 64%; width: 85%; height: 2px; background: linear-gradient(90deg,transparent,#d44201b0); filter: blur(1px); }
-.app-intro.intro-paused, .app-intro.intro-paused * { animation-play-state: paused !important; }
-.app-intro.pending .intro-logo { animation: none; opacity: .15; }
-@keyframes intro-finish { to { opacity: 0; transform: scale(1.015); visibility: hidden; } }
-@media(prefers-reduced-motion:reduce) {
-  .app-intro.show, .app-intro.exit { animation-duration: .12s; }
-  .app-intro .intro-car, .app-intro .intro-track { display: none; }
-  .app-intro .intro-logo, .app-intro .intro-caption, .app-intro .intro-subline { animation: none; opacity: 1; clip-path: none; }
-}

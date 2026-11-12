@@ -47,6 +47,7 @@ for (const row of rows) {
     body = { de: subject.slice(0, 180), en: body.en };
   }
   if (calendarChanged) body = { de: "🏁 Saisonstart: 2. Januar · danach wöchentlich\n🇳🇱 Neu dabei: Niederlande · Miami jetzt Rennen 4", en: "🏁 Season starts January 2 · weekly races\n🇳🇱 Netherlands added · Miami is now round 4" };
+  if (version === "1.3.14" && !calendarChanged) body = { de: "🏎️ Neues Intro mit Startampel, Funken und Lichtspuren\n✨ Große Logo-Enthüllung · weicher Übergang in die App", en: "🏎️ New intro with starting lights, sparks and speed trails\n✨ Bold logo reveal · smooth transition into the app" };
   if (version === "1.3.13" && !calendarChanged) body = { de: "🎬 Neuer Rennkalender-Trailer als Video mit Ton\n🏎️ Kürzeres, flüssigeres Start-Intro", en: "🎬 New race calendar video trailer with sound\n🏎️ Shorter, smoother startup intro" };
   if (version === "1.3.12" && !calendarChanged) body = { de: "🎬 Neuer Saison-Trailer zum Rennkalender\n🏁 Auf der Startseite und im Rennkalender ansehen", en: "🎬 New race calendar season trailer\n🏁 Watch it on Home and in the race calendar" };
   if (version === "1.3.11" && !calendarChanged) body = { de: "🔔 Handy-Benachrichtigungen für Anfragen und Neuigkeiten\n⚙️ In den Einstellungen aktivieren und testen", en: "🔔 Phone notifications for requests and app news\n⚙️ Enable and test them in Settings" };

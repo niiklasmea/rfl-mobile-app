@@ -44,3 +44,8 @@ Verification: automated permission/denial/account-switch/error/click tests, anon
 The supplied RFL_S4_2027_Kalender.mp4 is packaged in assets as a content-addressed MP4 (H.264, 1920x1080 at 50 fps; original AAC audio copied). Native controls support inline phone playback and fullscreen. The player starts only on a tap, pauses other players and stops audio when closed, backgrounded, or leaving the calendar. On the PWA the film needs a connection and uses normal browser byte-range requests; it is deliberately excluded from the service-worker cache and install precache. Windows bundles the film for offline playback. The poster is included in the app cache. New video/poster contents need new filenames so existing mobile browser caches cannot show an old trailer.
 
 The F1 startup now displays for 2.6 seconds plus a 0.38 second exit (1.2 seconds in reduced-motion mode). Animation timelines pause with the visible-time timer while the document is hidden. Minimized desktop launches still wait until restoration.
+
+
+## Effect intro (1.3.14)
+
+The startup is now a distinct sequence: five red starting lights, opening panels, a revised open-cockpit formula car with light trails, sparks, a circuit outline and grid, then an expanding ring and logo echoes. All effects settle before the final 760 ms opacity dissolve. The main sequence lasts 2800 ms; reduced motion remains a static 1200 ms logo and 120 ms fade. Visibility/minimized-start protections are unchanged. Intro styles live in intro.css; the exact former embedded logo is now a cached local asset. This avoids copying the logo bytes for the echo layers.

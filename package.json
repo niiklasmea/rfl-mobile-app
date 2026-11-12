@@ -1,6 +1,6 @@
 {
   "name": "rfl-app",
-  "version": "1.3.13",
+  "version": "1.3.14",
   "description": "RFL-APP · F1 League Season 4",
   "main": "desktop/main.cjs",
   "author": "RFL",
@@ -48,6 +48,7 @@
           "icons/**/*",
           "ui-fixes.css",
           "startup.js",
+          "intro.css",
           "trailer-player.js",
           "release-notes.json",
           "release-notes.js",

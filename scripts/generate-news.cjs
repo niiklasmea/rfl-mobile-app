@@ -1,11 +1,13 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { execFileSync } = require("node:child_process");
+const { groupNews } = require("./group-news.cjs");
 const root = path.resolve(__dirname, "..");
 const git = (...args) => execFileSync("git", args, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"], maxBuffer: 8 * 1024 * 1024 }).trim();
 const currentVersion = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8")).version;
-// Older release notices were removed at the owner's request. New updates still appear automatically.
-const firstNewsCommit = "4e49c80e10691dacf3d9e7151c11ea724d039705";
+// Keep the existing visible history when today's fixes collapse into one entry;
+// grouping must not bring older, already hidden notices back into the bell.
+const firstNewsCommit = "5b7f185c4ca323590f0bd0e2191b15ac9ebd6af2";
 const rows = git("log", "-40", "--format=%H%x09%cI%x09%s", `${firstNewsCommit}^..HEAD`).split("\n").filter(Boolean);
 const release139 = {
   de: "📱 iPhone-Menü besser erreichbar\n🏎️ Startanimation verbessert\n👤 Klarere Konto- und Benutzernamen-Hilfe\n🔔 Neuigkeiten direkt in der Glocke",
@@ -56,10 +58,11 @@ for (const row of rows) {
   if (version === "1.3.12" && !calendarChanged) body = { de: "🎬 Neuer Saison-Trailer zum Rennkalender\n🏁 Auf der Startseite und im Rennkalender ansehen", en: "🎬 New race calendar season trailer\n🏁 Watch it on Home and in the race calendar" };
   if (version === "1.3.11" && !calendarChanged) body = { de: "🔔 Handy-Benachrichtigungen für Anfragen und Neuigkeiten\n⚙️ In den Einstellungen aktivieren und testen", en: "🔔 Phone notifications for requests and app news\n⚙️ Enable and test them in Settings" };
   if (version === "1.3.9" && !calendarChanged) body = release139;
-  items.push({ id, publishedAt, title, body, action });
-  if (items.length === 6) break;
+  items.push({ id, publishedAt, title, body, action, releaseVersion: version });
+  if (items.length === 30) break;
 }
-const payload = { schemaVersion: 1, items };
+const groups = JSON.parse(fs.readFileSync(path.join(root, "release-groups.json"), "utf8"));
+const payload = { schemaVersion: 1, items: groupNews(items, groups).slice(0, 6) };
 fs.writeFileSync(path.join(root, "release-notes.json"), JSON.stringify(payload, null, 2) + "\n");
 fs.writeFileSync(path.join(root, "release-notes.js"), "window.RFL_NEWS_SEED = " + JSON.stringify(payload) + ";\n");
-console.log(`Prepared ${items.length} app news items for ${currentVersion}.`);
+console.log(`Prepared ${payload.items.length} app news items for ${currentVersion}.`);

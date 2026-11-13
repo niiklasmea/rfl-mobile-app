@@ -2,6 +2,19 @@
   "schemaVersion": 1,
   "items": [
     {
+      "id": "6183a2fcc4d7c6588306fd2dff599a825cb53593",
+      "publishedAt": "2026-11-13T15:25:43+01:00",
+      "title": {
+        "de": "RFL-APP 1.4.0",
+        "en": "RFL-APP 1.4.0"
+      },
+      "body": {
+        "de": "✨ Hilfe und Gründerprofil weiter aufgeräumt\n🔢 Neue Versionszählung: nach .9 folgt die nächste Reihe",
+        "en": "✨ Cleaner Help and founder profile\n🔢 New version numbering: .9 rolls into the next series"
+      },
+      "action": "home"
+    },
+    {
       "id": "7199cb1129f2a2a2f2253d81afb667208a5aad99",
       "publishedAt": "2026-11-13T14:44:12+01:00",
       "title": {
@@ -65,19 +78,6 @@
         "en": "🔔 Phone notifications for requests and app news\n⚙️ Enable and test them in Settings"
       },
       "action": "home"
-    },
-    {
-      "id": "0279d728f362f9d491beb3953bf6744b0d664032",
-      "publishedAt": "2026-10-27T23:42:52+01:00",
-      "title": {
-        "de": "Rennkalender aktualisiert",
-        "en": "Race calendar updated"
-      },
-      "body": {
-        "de": "🏁 Saisonstart: 2. Januar · danach wöchentlich\n🇳🇱 Neu dabei: Niederlande · Miami jetzt Rennen 4",
-        "en": "🏁 Season starts January 2 · weekly races\n🇳🇱 Netherlands added · Miami is now round 4"
-      },
-      "action": "calendar"
     }
   ]
 }

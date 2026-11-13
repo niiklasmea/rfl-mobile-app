@@ -34,12 +34,13 @@
     finally{clearTimeout(timer);}
   }
   async function sync(){
+    if(busy)return;
     const run=++generation;
     if(!supported()||!account||!client){enabled=false;render();return;}
     try{
       const reg=await registration();const sub=await reg.pushManager.getSubscription();
       const saved=sub?await rpc('rfl_push_status',{p_endpoint:sub.endpoint}):null;
-      if(run!==generation)return;
+      if(run!==generation||busy)return;
       subscription=sub;enabled=Boolean(saved && Notification.permission==='granted');
       if(saved){news.checked=saved.news;friends.checked=saved.friends;}
       render();
@@ -51,36 +52,71 @@
   }
   async function deactivate(){
     ++generation;
-    if(supported()){
-      const sub=subscription||await (await registration()).pushManager.getSubscription();
-      if(sub){
-        // Unsubscribe locally even if the server is offline: no pushes can reach this browser afterwards.
-        try{if(client&&account)await rpc('rfl_push_remove',{p_endpoint:sub.endpoint});}finally{await sub.unsubscribe();}
+    try{
+      if(supported()){
+        const sub=subscription||await (await registration()).pushManager.getSubscription();
+        if(sub){
+          // Sign-out/account switches must stop the former account's delivery even while offline.
+          try{if(client&&account)await rpc('rfl_push_remove',{p_endpoint:sub.endpoint});}finally{await sub.unsubscribe();}
+        }
+      }
+    }finally{subscription=null;enabled=false;render();}
+  }
+  async function subscribe(reg,key){
+    const bytes=Uint8Array.from(atob(key.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0));
+    for(let attempt=0;attempt<3;attempt++){
+      try{
+        const existing=await reg.pushManager.getSubscription();
+        if(existing)return {sub:existing,created:false};
+        return {sub:await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:bytes}),created:true};
+      }catch(error){
+        // A mobile push service may still be finishing the previous unsubscription.
+        if(attempt===2||!['AbortError','NetworkError','InvalidStateError'].includes(error.name))throw error;
+        await new Promise(resolve=>setTimeout(resolve,attempt===0?500:1500));
       }
     }
-    subscription=null;enabled=false;render();
   }
   toggle.addEventListener('click',async()=>{
     if(busy||!account)return;
-    busy=true;render();
+    const turningOff=enabled,owner=account;let stage='permission',created=false,attemptedSub=null,failure=null;
+    ++generation;busy=true;render();
+    const stillSignedIn=()=>{if(account!==owner)throw Error('account changed');};
     try{
-      if(enabled){await deactivate();return;}
-      // Ask only after the person's explicit tap; iPhone requires this user gesture.
-      const permission=await Notification.requestPermission();
-      if(permission!=='granted'){render();return;}
-      const key=await rpc('rfl_push_public_key');if(!key)throw Error('server not ready');
-      const reg=await registration();subscription=await reg.pushManager.getSubscription();
-      if(!subscription){
-        const bytes=Uint8Array.from(atob(key.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0));
-        subscription=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:bytes});
+      if(turningOff){
+        stage='remove';
+        const sub=subscription||await (await registration()).pushManager.getSubscription();stillSignedIn();
+        // Delete the server destination, but retain the browser permission and subscription.
+        // Turning notifications back on then needs no new Google/Apple registration.
+        if(sub)await rpc('rfl_push_remove',{p_endpoint:sub.endpoint});
+        subscription=null;enabled=false;
+      }else{
+        // Ask only after the person's explicit tap; iPhone requires this user gesture.
+        const permission=Notification.permission==='granted'?'granted':await Notification.requestPermission();
+        if(permission!=='granted')return;
+        stillSignedIn();stage='server';
+        const key=await rpc('rfl_push_public_key');if(!key)throw Error('server not ready');
+        stillSignedIn();stage='registration';
+        const reg=await registration();const result=await subscribe(reg,key);
+        attemptedSub=result.sub;created=result.created;stillSignedIn();
+        subscription=attemptedSub;stage='save';await save();stillSignedIn();enabled=true;
       }
-      await save();enabled=true;
-    }catch{
-      if(subscription)await subscription.unsubscribe().catch(()=>{});
-      enabled=false;message('Konnte nicht aktiviert werden. Bitte erneut versuchen.','Could not enable notifications. Please try again.');
-      return;
-    }finally{busy=false;toggle.disabled=false;test.disabled=false;news.disabled=false;friends.disabled=false;}
-    render();
+    }catch(error){
+      if(!turningOff){
+        if(attemptedSub&&(created||account!==owner))await attemptedSub.unsubscribe().catch(()=>{});
+        subscription=null;enabled=false;
+      }
+      failure={stage,error};
+    }finally{
+      busy=false;render();
+      if(failure){
+        if(account!==owner)return;
+        if(turningOff)message('Ausschalten fehlgeschlagen. Bitte mit Internet erneut versuchen.','Could not turn notifications off. Please reconnect and try again.');
+        else if(Notification.permission==='denied'||failure.error.name==='NotAllowedError')message('Bitte Mitteilungen für RFL in den Handy- bzw. Browser-Einstellungen erlauben.','Please allow RFL notifications in your phone or browser settings.');
+        else if(failure.stage==='registration')message('Handy-Verbindung konnte nicht erneuert werden. Schließe die RFL-App einmal vollständig und versuche es erneut.','Could not renew the phone connection. Close the RFL app completely, then try again.');
+        else if(failure.error.code==='PGRST301'||failure.error.status===401)message('Bitte in der Freundesliste erneut anmelden und danach aktivieren.','Please sign in again in the friends list, then enable notifications.');
+        else message('Verbindung zum RFL-Server fehlgeschlagen. Bitte mit Internet erneut versuchen.','Could not connect to the RFL server. Please reconnect and try again.');
+      }
+    }
   });
   for(const input of [news,friends])input.addEventListener('change',async()=>{
     busy=true;render();

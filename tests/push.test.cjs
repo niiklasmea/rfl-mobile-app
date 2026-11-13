@@ -6,18 +6,18 @@ const path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const flush=()=>new Promise(resolve=>setImmediate(resolve));
 
-function fixture({ios=false,standalone=false,denied=false,saveError=false}={}){
+function fixture({ios=false,standalone=false,denied=false,granted=false,saveError=false,removeError=false,subscribeFailures=0}={}){
   const nodes=new Map();
   function node(id){if(!nodes.has(id))nodes.set(id,{checked:true,disabled:false,hidden:false,textContent:'',events:{},setAttribute(){},addEventListener(name,fn){this.events[name]=fn;},click(){return this.events.click?.();}});return nodes.get(id);}
-  let sub=null,permissions=0,subscriptions=0,removed=0;const calls=[];
-  const reg={pushManager:{async getSubscription(){return sub;},async subscribe(){subscriptions++;sub={endpoint:'https://fcm.googleapis.com/test',toJSON(){return{endpoint:this.endpoint,keys:{auth:'abc',p256dh:'def'}};},async unsubscribe(){removed++;sub=null;return true;}};return sub;}}};
-  const Notification={permission:denied?'denied':'default',async requestPermission(){permissions++;return this.permission=denied?'denied':'granted';}};
+  let sub=null,saved=null,permissions=0,subscriptions=0,removed=0;const calls=[];
+  const reg={pushManager:{async getSubscription(){return sub;},async subscribe(){subscriptions++;if(subscribeFailures-->0)throw Object.assign(Error('push service busy'),{name:'AbortError'});sub={endpoint:'https://fcm.googleapis.com/test',toJSON(){return{endpoint:this.endpoint,keys:{auth:'abc',p256dh:'def'}};},async unsubscribe(){removed++;sub=null;return true;}};return sub;}}};
+  const Notification={permission:denied?'denied':granted?'granted':'default',async requestPermission(){permissions++;return this.permission=denied?'denied':'granted';}};
   const window={matchMedia:()=>({matches:standalone}),addEventListener(){},setTimeout:fn=>fn(),PushManager:function(){},Notification};
   const navigator={userAgent:ios?'iPhone':'Android',standalone,serviceWorker:{ready:Promise.resolve(reg),addEventListener(){}}};
   const document={documentElement:{lang:'de'},getElementById:node};
   const context={window,document,navigator,Notification,location:{protocol:'https:',href:'https://example.com/'},URL,Uint8Array,atob,setTimeout,clearTimeout};
   vm.runInNewContext(fs.readFileSync(path.join(root,'push.js'),'utf8'),context);
-  window.RflPush.init({async rpc(name,args){calls.push({name,args});if(name==='rfl_push_public_key')return{data:'BA',error:null};if(name==='rfl_push_save'&&saveError)return{error:Error('offline')};return{data:null,error:null};}});
+  window.RflPush.init({async rpc(name,args){calls.push({name,args});if(name==='rfl_push_public_key')return{data:'BA',error:null};if(name==='rfl_push_save'){if(saveError)return{error:Error('offline')};saved={news:args.p_news,friends:args.p_friends};}if(name==='rfl_push_remove'){if(removeError)return{error:Error('offline')};saved=null;}return{data:name==='rfl_push_status'?saved:null,error:null};}});
   return{window,node,calls,get counts(){return{permissions,subscriptions,removed};}};
 }
 test('push asks permission only after a signed-in person taps Enable',async()=>{
@@ -42,7 +42,41 @@ test('denied permission never creates a subscription',async()=>{
 });
 test('server errors do not leave a browser subscribed while reporting disabled',async()=>{
   const f=fixture({saveError:true});f.window.RflPush.setAccount({id:'a'});await flush();await f.node('pushToggle').click();
-  assert.equal(f.counts.removed,1);assert.match(f.node('pushStatus').textContent,/nicht aktiviert/);assert.equal(f.node('pushOptions').hidden,true);
+  assert.equal(f.counts.removed,1);assert.match(f.node('pushStatus').textContent,/RFL-Server/);assert.equal(f.node('pushOptions').hidden,true);
+});
+
+test('turning notifications off and on repeatedly reuses the phone connection and removes the server destination while off',async()=>{
+  const f=fixture();f.window.RflPush.setAccount({id:'a'});await flush();await f.node('pushToggle').click();
+  for(let i=0;i<3;i++){
+    await f.node('pushToggle').click();
+    assert.equal(f.node('pushOptions').hidden,true);assert.equal(f.node('pushToggle').textContent,'Aktivieren');
+    await f.node('openSettings').click();await flush();assert.equal(f.node('pushOptions').hidden,true);
+    await f.node('pushToggle').click();assert.equal(f.node('pushOptions').hidden,false);
+  }
+  assert.equal(f.counts.subscriptions,1);assert.equal(f.counts.permissions,1);assert.equal(f.counts.removed,0);
+  assert.equal(f.calls.filter(c=>c.name==='rfl_push_remove').length,3);
+  // Account sign-out must still revoke the retained browser subscription.
+  await f.node('pushToggle').click();await f.window.RflPush.beforeSignOut();assert.equal(f.counts.removed,1);
+});
+
+test('a previously allowed phone recovers when the push service is still processing unsubscription',async()=>{
+  const f=fixture({granted:true,subscribeFailures:2});f.window.RflPush.setAccount({id:'a'});await flush();
+  await f.node('pushToggle').click();assert.equal(f.counts.subscriptions,3);assert.equal(f.counts.permissions,0);
+  assert.equal(f.node('pushOptions').hidden,false);assert.match(f.node('pushStatus').textContent,/Aktiv/);
+});
+
+test('an unavailable phone push service leaves Enable usable with a specific recovery message',async()=>{
+  const f=fixture({granted:true,subscribeFailures:3});f.window.RflPush.setAccount({id:'a'});await flush();
+  await f.node('pushToggle').click();assert.equal(f.node('pushToggle').disabled,false);
+  assert.equal(f.node('pushOptions').hidden,true);assert.match(f.node('pushStatus').textContent,/vollständig/);
+  await f.node('pushToggle').click();assert.equal(f.node('pushOptions').hidden,false);
+});
+
+test('a failed server removal does not falsely report disabled and sign-out still unsubscribes offline',async()=>{
+  const f=fixture({removeError:true});f.window.RflPush.setAccount({id:'a'});await flush();await f.node('pushToggle').click();
+  await f.node('pushToggle').click();assert.equal(f.node('pushOptions').hidden,false);
+  assert.equal(f.node('pushToggle').textContent,'Ausschalten');assert.match(f.node('pushStatus').textContent,/Ausschalten fehlgeschlagen/);
+  await assert.rejects(f.window.RflPush.beforeSignOut());assert.equal(f.counts.removed,1);assert.equal(f.node('pushOptions').hidden,true);
 });
 test('a push displays a system notification and clicking cannot navigate off-site',async()=>{
   const events={},shown=[],opened=[];

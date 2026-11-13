@@ -40,6 +40,8 @@ Verification: automated permission/denial/account-switch/error/click tests, anon
 
 The background sender requests `high` Web Push urgency for the opted-in, visible news, friend and test notifications so push services can attempt delivery while the phone is idle. It retains a one-day TTL and the existing one-minute server schedule; delivery does not depend on a foreground app client. Failure diagnostics contain only the provider hostname and HTTP status, never device endpoints, keys or message contents. A successful provider response is acceptance for delivery, not proof that the phone displayed a banner. Background delivery must be tested on the physical phone while another app is open. This server-only change needs no app reinstall.
 
+As of 1.4.1, the Settings off switch removes the server destination (and its pending jobs) without revoking the browser's push subscription. Re-enabling reuses the allowed phone connection. Sign-out/account switches still unsubscribe locally, including after server-removal errors. Previously unsubscribed phones retry transient push-service registration errors up to three times; an existing permission grant is reused. A failed removal remains visibly enabled, and registration/server/permission failures have distinct recovery messages. Regression checks cover repeated off/on cycles, temporary/permanent registration failures, and offline sign-out.
+
 
 ## Trailer and intro (1.3.13)
 

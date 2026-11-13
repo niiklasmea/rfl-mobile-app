@@ -31,6 +31,8 @@ jobs:
           node-version: 24
       - name: Generate app news from published changes
         run: node scripts/generate-news.cjs
+      - name: Validate release number
+        run: node scripts/release-version.cjs --check
       - name: Check startup and app news behavior
         run: node --test tests/*.test.cjs
       - name: Prepare consistent browser cache versions

@@ -47,6 +47,7 @@ for (const row of rows) {
     body = { de: subject.slice(0, 180), en: body.en };
   }
   if (calendarChanged) body = { de: "🏁 Saisonstart: 2. Januar · danach wöchentlich\n🇳🇱 Neu dabei: Niederlande · Miami jetzt Rennen 4", en: "🏁 Season starts January 2 · weekly races\n🇳🇱 Netherlands added · Miami is now round 4" };
+  if (version === "1.4.0" && !calendarChanged) body = { de: "✨ Hilfe und Gründerprofil weiter aufgeräumt\n🔢 Neue Versionszählung: nach .9 folgt die nächste Reihe", en: "✨ Cleaner Help and founder profile\n🔢 New version numbering: .9 rolls into the next series" };
   if (version === "1.3.15" && !calendarChanged) body = { de: "💬 Neues Hilfe-Fenster mit Discord-Kontakt\n🏁 Fünf Fairplay-Regeln · aufgeräumte Seiten\n📸 Besserer Bildausschnitt beim Gründerprofil", en: "💬 New Help window with Discord contact\n🏁 Five fair-play rules · cleaner pages\n📸 Improved founder portrait framing" };
   if (version === "1.3.14" && !calendarChanged) body = { de: "🏎️ Neues Intro mit Startampel, Funken und Lichtspuren\n✨ Große Logo-Enthüllung · weicher Übergang in die App", en: "🏎️ New intro with starting lights, sparks and speed trails\n✨ Bold logo reveal · smooth transition into the app" };
   if (version === "1.3.13" && !calendarChanged) body = { de: "🎬 Neuer Rennkalender-Trailer als Video mit Ton\n🏎️ Kürzeres, flüssigeres Start-Intro", en: "🎬 New race calendar video trailer with sound\n🏎️ Shorter, smoother startup intro" };

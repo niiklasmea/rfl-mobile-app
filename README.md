@@ -55,4 +55,11 @@ The startup is now a distinct sequence: five red starting lights, opening panels
 
 The league page has five fair-play guidelines, followed by a single league summary and the founder story. The new fifth rule covers flags/race-control instructions and safe rejoining. The founder photo uses a lower crop (80%, 84% on phones) to place the person higher in the frame. Duplicate photo captions, value cards and contact buttons were removed. The home page keeps two hero actions and three quick links; redundant promotion/stat cards and repeated copy are gone. Race dates are unchanged.
 
-Help is a separate, translated modal opened from every page through the Help nav button. It contains the owner-provided Discord profile URL, copyable ID, and concise FAQs linking to existing Settings and Friends dialogs. The modal supports Escape/backdrop close, focus restoration/trapping, an inert background, safe-area spacing, light/dark modes, and an offline clipboard fallback that selects the ID. Opening Discord never sends a message automatically.
+Help is a separate, translated modal opened from every page through the Help nav button. It contains the owner-provided Discord profile URL and concise FAQs linking to existing Settings and Friends dialogs. The modal supports Escape/backdrop close, focus restoration/trapping, an inert background, safe-area spacing, light/dark modes. Opening Discord never sends a message automatically.
+
+
+## Version policy (1.4.0 onward)
+
+Minor and patch components use 0–9: 1.4.8 → 1.4.9 → 1.5.0, and 1.9.9 → 2.0.0. Existing historical releases remain named as published. The legacy 1.3.15 installation upgrades to 1.4.0 normally. Run `node scripts/release-version.cjs --dry-run` to preview, then run it without arguments once to advance package.json and the app footer. Both publishing workflows and the Windows build validate the version, matching footer, and release tag.
+
+This release also removes the Help copy button, visible Discord ID, and the founder contact/name strip; the Help profile link is retained.

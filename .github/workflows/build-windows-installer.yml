@@ -27,6 +27,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Validate release number and tag
+        run: node scripts/release-version.cjs --check
       - name: Check startup and app news behavior
         run: node --test tests/*.test.cjs
       - name: Build Windows setup

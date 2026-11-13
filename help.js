@@ -5,10 +5,7 @@
   const trigger=document.getElementById('openHelp');
   const closeButton=document.getElementById('closeHelp');
   const app=document.getElementById('app');
-  const idInput=document.getElementById('helpDiscordId');
-  const status=document.getElementById('helpStatus');
   let previousFocus=null,previousInert=false;
-  const text=(key)=>words[document.documentElement.lang]?.[key]||words.de[key];
 
   function open(){
     if(!overlay.hidden)return;
@@ -20,7 +17,7 @@
     document.documentElement.classList.add('help-open');
     overlay.querySelectorAll('details').forEach(item=>{item.open=false;});
     panel.scrollTop=0;
-    status.textContent='';closeButton.focus();
+    closeButton.focus();
   }
   function close(restoreFocus=true){
     if(overlay.hidden)return;
@@ -43,10 +40,6 @@
     if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
     else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
   });
-  document.getElementById('copyHelpDiscordId').addEventListener('click',async()=>{
-    try{await navigator.clipboard.writeText(idInput.value);status.textContent=text('helpCopied');}
-    catch{idInput.focus();idInput.select();status.textContent=text('helpCopyFallback');}
-  });
   overlay.querySelectorAll('[data-help-open]').forEach(button=>button.addEventListener('click',()=>{
     close(false);
     document.getElementById(button.dataset.helpOpen)?.click();
@@ -54,5 +47,4 @@
   overlay.querySelectorAll('details').forEach(item=>item.addEventListener('toggle',()=>{
     if(item.open)overlay.querySelectorAll('details').forEach(other=>{if(other!==item)other.open=false;});
   }));
-  window.addEventListener('rfl:language-changed',()=>{status.textContent='';});
 })();

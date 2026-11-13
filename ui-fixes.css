@@ -99,7 +99,6 @@
 .home-roadmap { padding-top: 32px; }
 .home-roadmap-head h2 { font-size: clamp(23px,3vw,31px); margin: 0; }
 .home-roadmap-head { margin-bottom: 18px; }
-.founder-meta { gap: 10px; }
 .nav button[aria-expanded="true"] { color: var(--text); }
 .nav button[aria-expanded="true"]::after { right: 0; }
 
@@ -132,11 +131,7 @@
 .help-contact p { color: var(--muted); font-size: 12px; line-height: 1.65; margin: 0; }
 .help-contact-actions { display: flex; flex-wrap: wrap; gap: 9px; margin: 18px 0; }
 .help-contact-actions .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; text-decoration: none; }
-.help-id-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 12px; margin: 0 0 12px; }
-.help-id-row label { color: var(--muted); font-size: 10px; }
-.help-id-row input { min-width: 0; width: 176px; max-width: 100%; padding: 4px 0; border: 0; background: transparent; color: var(--text); font-size: 12px; font-variant-numeric: tabular-nums; }
 .help-hint { display: block; color: var(--muted); font-size: 11px; line-height: 1.6; }
-.help-contact .help-status:not(:empty) { margin-top: 12px; color: var(--text); }
 .help-quick-title { margin: 26px 0 12px; font-size: 13px; font-weight: 700; }
 .help-answers details { border-top: 1px solid var(--line); }
 .help-answers summary { padding: 15px 0; cursor: pointer; font-size: 12px; font-weight: 650; line-height: 1.4; }
@@ -151,7 +146,6 @@
   .guide-item { padding: 16px; }
   .help-panel { padding: 20px; border-radius: 13px; }
   .help-contact { padding: 16px; }
-  .help-id-row input { font-size: 16px; width: 200px; }
-}
+  }
 @media(prefers-reduced-motion:reduce) { .help-panel { animation: none; } }
 

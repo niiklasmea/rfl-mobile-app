@@ -38,26 +38,31 @@ Deno.serve(async req=>{
     const jobs=check(await db.rpc('rfl_push_claim'));
     let sent=0,failed=0;
     for(let offset=0;offset<jobs.length;offset+=5) await Promise.all(jobs.slice(offset,offset+5).map(async job=>{
+      let provider='unknown';
       try {
         const sub=check(await db.from('rfl_push_subscriptions').select('*').eq('id',job.subscription_id).maybeSingle());
         if(!sub) return;
+        provider=new URL(sub.endpoint).hostname;
         let deliver=job.kind==='test'||Boolean(sub[job.kind]);
         if(job.kind==='friends'){
           const request=check(await db.from('rfl_friend_requests').select('status,to_id').eq('id',job.payload.requestId).maybeSingle());
           deliver=deliver&&request?.status==='pending'&&request?.to_id===sub.user_id;
         }
         if(deliver){
-          await webpush.sendNotification({endpoint:sub.endpoint,keys:sub.keys},JSON.stringify({...job.payload,id:job.event_id}),{TTL:86400,urgency:'normal',timeout:8000});
+          // These are opted-in, visible notifications. High urgency asks the push
+          // service to wake the worker instead of deferring delivery while idle.
+          await webpush.sendNotification({endpoint:sub.endpoint,keys:sub.keys},JSON.stringify({...job.payload,id:job.event_id}),{TTL:86400,urgency:'high',timeout:8000});
           sent++;
         }
         check(await db.from('rfl_push_jobs').update({delivered_at:new Date().toISOString()}).eq('id',job.id));
       } catch(error){
         failed++;
+        console.warn(JSON.stringify({event:'rfl_push_send_failed',provider,status:Number(error.statusCode)||null}));
         if(error.statusCode===404||error.statusCode===410) check(await db.from('rfl_push_subscriptions').delete().eq('id',job.subscription_id));
         // Never log endpoints, keys or message contents.
       }
     }));
     check(await db.from('rfl_push_jobs').delete().lt('created_at',new Date(Date.now()-7*86400000).toISOString()));
-    return response({sent,failed,claimed:jobs.length});
+    return response({sent,failed,claimed:jobs.length,urgency:'high'});
   } catch { console.error('Push worker failed');return response({error:'Push worker failed'},500); }
 });

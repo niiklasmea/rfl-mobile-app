@@ -38,6 +38,8 @@ Friend inserts enqueue recipient-only jobs. The fixed published release feed pro
 
 Verification: automated permission/denial/account-switch/error/click tests, anonymous-access rejection, live RPC save/test/remove in a rolled-back transaction, and successful cron/worker HTTP 200. Actual OS delivery must additionally be checked using Settings > Test notification on a physical opted-in phone.
 
+The background sender requests `high` Web Push urgency for the opted-in, visible news, friend and test notifications so push services can attempt delivery while the phone is idle. It retains a one-day TTL and the existing one-minute server schedule; delivery does not depend on a foreground app client. Failure diagnostics contain only the provider hostname and HTTP status, never device endpoints, keys or message contents. A successful provider response is acceptance for delivery, not proof that the phone displayed a banner. Background delivery must be tested on the physical phone while another app is open. This server-only change needs no app reinstall.
+
 
 ## Trailer and intro (1.3.13)
 

@@ -2,56 +2,17 @@
   "schemaVersion": 1,
   "items": [
     {
-      "id": "2b2c6139ec99b56473aa5e18787fa15542051337",
-      "publishedAt": "2026-11-13T16:43:09+01:00",
-      "title": {
-        "de": "RFL-APP 1.4.2",
-        "en": "RFL-APP 1.4.2"
-      },
-      "body": {
-        "de": "🔔 Handy-Verbindung gezielt neu einrichten\n⚙️ Klare Rückmeldung beim Aktivieren",
-        "en": "🔔 Reset a stuck phone notification connection\n⚙️ Clear feedback when enabling notifications"
-      },
-      "action": "home"
-    },
-    {
-      "id": "72b73eb96b34cb7735ff8a1770a988a046b4a0a2",
-      "publishedAt": "2026-11-13T16:23:32+01:00",
-      "title": {
-        "de": "RFL-APP 1.4.1",
-        "en": "RFL-APP 1.4.1"
-      },
-      "body": {
-        "de": "🔔 Benachrichtigungen leichter wieder aktivieren\n📱 Stabilere Handy-Verbindung",
-        "en": "🔔 Easier notification reactivation\n📱 More reliable phone connection"
-      },
-      "action": "home"
-    },
-    {
-      "id": "6183a2fcc4d7c6588306fd2dff599a825cb53593",
-      "publishedAt": "2026-11-13T15:25:43+01:00",
+      "id": "rfl-1.4.0-2026-11-13",
+      "publishedAt": "2026-11-13T16:54:44+01:00",
       "title": {
         "de": "RFL-APP 1.4.0",
         "en": "RFL-APP 1.4.0"
       },
       "body": {
-        "de": "✨ Hilfe und Gründerprofil weiter aufgeräumt\n🔢 Neue Versionszählung: nach .9 folgt die nächste Reihe",
-        "en": "✨ Cleaner Help and founder profile\n🔢 New version numbering: .9 rolls into the next series"
+        "de": "✨ Liga & Hilfe aufgeräumt · 5 Fairplay-Regeln\n📸 Gründerprofil besser dargestellt\n⚙️ Einstellungen öffnen ohne Tastatur\n🔔 Hintergrund-Mitteilungen & reparierbare Handy-Verbindung\n🔢 Versionszählung: nach .9 folgt die nächste Reihe",
+        "en": "✨ Cleaner League & Help · 5 fair-play rules\n📸 Improved founder profile\n⚙️ Settings open without the keyboard\n🔔 Background notifications & phone connection repair\n🔢 Version numbering: .9 rolls into the next series"
       },
-      "action": "home"
-    },
-    {
-      "id": "7199cb1129f2a2a2f2253d81afb667208a5aad99",
-      "publishedAt": "2026-11-13T14:44:12+01:00",
-      "title": {
-        "de": "RFL-APP 1.3.15",
-        "en": "RFL-APP 1.3.15"
-      },
-      "body": {
-        "de": "💬 Neues Hilfe-Fenster mit Discord-Kontakt\n🏁 Fünf Fairplay-Regeln · aufgeräumte Seiten\n📸 Besserer Bildausschnitt beim Gründerprofil",
-        "en": "💬 New Help window with Discord contact\n🏁 Five fair-play rules · cleaner pages\n📸 Improved founder portrait framing"
-      },
-      "action": "home"
+      "action": "notifications"
     },
     {
       "id": "e2f01c9f278348336012d3649702a2da86c61ad4",

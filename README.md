@@ -42,6 +42,8 @@ The background sender requests `high` Web Push urgency for the opted-in, visible
 
 As of 1.4.1, the Settings off switch removes the server destination (and its pending jobs) without revoking the browser's push subscription. Re-enabling reuses the allowed phone connection. Sign-out/account switches still unsubscribe locally, including after server-removal errors. Previously unsubscribed phones retry transient push-service registration errors up to three times; an existing permission grant is reused. A failed removal remains visibly enabled, and registration/server/permission failures have distinct recovery messages. Regression checks cover repeated off/on cycles, temporary/permanent registration failures, and offline sign-out.
 
+1.4.2 adds bounded waits for push RPCs, permission requests and browser subscription operations, with visible progress and sanitized error codes. After a phone-registration failure, an explicit repair button unregisters only the current app's exact service-worker scope, then reloads before a fresh registration; it never clears profile, auth or cache storage. The user must tap Enable again after the reload. The repair is a recovery attempt for browser registration failures, not a guarantee against a phone/Google push-service outage. Physical-device verification is still required. Tests cover hanging requests, retry-button recovery, the scoped reset/reload sequence, and preserving profile data.
+
 
 ## Trailer and intro (1.3.13)
 

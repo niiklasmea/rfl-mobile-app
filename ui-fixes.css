@@ -149,3 +149,7 @@
   }
 @media(prefers-reduced-motion:reduce) { .help-panel { animation: none; } }
 
+#pushRepair { width: 100%; margin-top: 8px; }
+#pushErrorDetails { margin-top: 10px; color: var(--muted); font-size: 10px; }
+#pushErrorDetails summary { cursor: pointer; }
+#pushErrorCode { display: block; margin-top: 6px; overflow-wrap: anywhere; }

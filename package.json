@@ -1,6 +1,6 @@
 {
   "name": "rfl-app",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "RFL-APP · F1 League Season 4",
   "main": "desktop/main.cjs",
   "author": "RFL",

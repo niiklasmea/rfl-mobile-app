@@ -6,8 +6,8 @@ const item=(version,day=13)=>({id:'commit-'+version,publishedAt:`2026-11-${day}T
 
 test('today’s fixes become one 1.4.0 notice while older and future releases remain separate',()=>{
   const releases=['1.4.3','1.4.2','1.4.1','1.4.0','1.3.15'].map(v=>item(v));
-  const result=groupNews([item('1.4.4',14),...releases,item('1.3.14',12)],groups);
-  assert.deepEqual(result.map(n=>n.title.de),['RFL-APP 1.4.4','RFL-APP 1.4.0','RFL-APP 1.3.14']);
+  const result=groupNews([item('1.4.5',14),...releases,item('1.3.14',12)],groups);
+  assert.deepEqual(result.map(n=>n.title.de),['RFL-APP 1.4.5','RFL-APP 1.4.0','RFL-APP 1.3.14']);
   assert.equal(result[1].publishedAt,releases[0].publishedAt);
   assert.match(result[1].body.de,/Tastatur/);assert.match(result[1].body.de,/Mitteilungen/);
   assert(result.every(n=>!('releaseVersion' in n)));

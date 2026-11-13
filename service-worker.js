@@ -9,6 +9,7 @@ const APP_FILES = [
   "./push-worker.js",
   "./startup.js",
   "./intro.css",
+  "./help.js",
   "./assets/rfl-intro-logo.png",
   "./trailer-player.js",
   "./assets/rfl-s4-2027-poster-05b8286fed.jpg",

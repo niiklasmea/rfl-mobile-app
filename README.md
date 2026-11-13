@@ -49,3 +49,10 @@ The F1 startup now displays for 2.6 seconds plus a 0.38 second exit (1.2 seconds
 ## Effect intro (1.3.14)
 
 The startup is now a distinct sequence: five red starting lights, opening panels, a revised open-cockpit formula car with light trails, sparks, a circuit outline and grid, then an expanding ring and logo echoes. All effects settle before the final 760 ms opacity dissolve. The main sequence lasts 2800 ms; reduced motion remains a static 1200 ms logo and 120 ms fade. Visibility/minimized-start protections are unchanged. Intro styles live in intro.css; the exact former embedded logo is now a cached local asset. This avoids copying the logo bytes for the echo layers.
+
+
+## League layout and Help (1.3.15)
+
+The league page has five fair-play guidelines, followed by a single league summary and the founder story. The new fifth rule covers flags/race-control instructions and safe rejoining. The founder photo uses a lower crop (80%, 84% on phones) to place the person higher in the frame. Duplicate photo captions, value cards and contact buttons were removed. The home page keeps two hero actions and three quick links; redundant promotion/stat cards and repeated copy are gone. Race dates are unchanged.
+
+Help is a separate, translated modal opened from every page through the Help nav button. It contains the owner-provided Discord profile URL, copyable ID, and concise FAQs linking to existing Settings and Friends dialogs. The modal supports Escape/backdrop close, focus restoration/trapping, an inert background, safe-area spacing, light/dark modes, and an offline clipboard fallback that selects the ID. Opening Discord never sends a message automatically.
